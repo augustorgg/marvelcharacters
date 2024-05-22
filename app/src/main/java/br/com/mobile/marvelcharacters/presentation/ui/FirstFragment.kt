@@ -90,7 +90,6 @@ class FirstFragment : Fragment() {
             btnWhatsapp.setOnClickListener {
                 viewModel.getMarvelCharactersDetails()
             }
-
             errorLayout.retryButton.setOnClickListener {
                 binding.errorLayout.root.hide()
                 viewModel.getMarvelCharactersDetails()

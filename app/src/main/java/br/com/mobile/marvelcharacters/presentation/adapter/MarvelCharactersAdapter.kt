@@ -11,7 +11,7 @@ import com.squareup.picasso.Picasso
 
 class MarvelCharactersAdapter(
     private var characters: List<CharacterResult>?,
-    private val onItemClick: (CharacterResult) -> Unit
+    private val onItemClick: (CharacterResult?) -> Unit
 ) :
     RecyclerView.Adapter<MarvelCharactersAdapter.ViewHolder>() {
 
@@ -43,6 +43,9 @@ class MarvelCharactersAdapter(
                 .error(R.drawable.whatsapp)
                 .into(binding.ivItem)
             binding.tvItem.text = characterDetail?.name
+            binding.root.setOnClickListener {
+                onItemClick.invoke(characterDetail)
+            }
         }
     }
 }
