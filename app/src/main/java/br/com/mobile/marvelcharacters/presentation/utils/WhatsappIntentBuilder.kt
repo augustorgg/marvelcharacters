@@ -1,4 +1,4 @@
-package br.com.mobile.marvelcharacters.presentation.util
+package br.com.mobile.marvelcharacters.presentation.utils
 
 import android.content.Intent
 import android.net.Uri

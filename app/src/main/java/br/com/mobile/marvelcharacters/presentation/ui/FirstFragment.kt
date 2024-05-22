@@ -1,18 +1,20 @@
 package br.com.mobile.marvelcharacters.presentation.ui
 
-import MarvelCharactersAdapter
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.databinding.FragmentFirstBinding
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
+import br.com.mobile.marvelcharacters.presentation.adapter.MarvelCharactersAdapter
 import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersViewState
+import br.com.mobile.marvelcharacters.presentation.utils.hide
+import br.com.mobile.marvelcharacters.presentation.utils.show
+import br.com.mobile.marvelcharacters.presentation.utils.startShimmering
+import br.com.mobile.marvelcharacters.presentation.utils.stopShimmering
 import br.com.mobile.marvelcharacters.presentation.viewmodel.MarvelCharactersViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -20,7 +22,6 @@ class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
     private val viewModel: MarvelCharactersViewModel by viewModel()
-
 
     private val binding get() = _binding!!
 
@@ -44,16 +45,25 @@ class FirstFragment : Fragment() {
         viewModel.viewState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is MarvelCharactersViewState.Loading -> {
-                    Toast.makeText(this.context, "Loading...", Toast.LENGTH_SHORT).show()
+                    binding.apply {
+                        recyclerView.hide()
+                        shimmerLayout.startShimmering()
+                    }
                 }
 
                 is MarvelCharactersViewState.Success -> {
                     setupRecyclerView(state.marvelCharacters)
-                    Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
+                    binding.apply {
+                        recyclerView.show()
+                        shimmerLayout.stopShimmering()
+                    }
                 }
 
                 is MarvelCharactersViewState.Error -> {
-                    Toast.makeText(this.context, "Error: ${state.message}", Toast.LENGTH_SHORT).show()
+                    binding.apply {
+                        errorLayout.root.show()
+                        shimmerLayout.stopShimmering()
+                    }
                 }
             }
         }
@@ -62,7 +72,11 @@ class FirstFragment : Fragment() {
     private fun setupRecyclerView(characters: List<CharacterResult>?) {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = MarvelCharactersAdapter(characters)
+            adapter = MarvelCharactersAdapter(characters) {
+                val action =
+                    FirstFragmentDirections.actionFirstFragmentToSecondFragment(it)
+                findNavController().navigate(action)
+            }
         }
     }
 
@@ -71,9 +85,16 @@ class FirstFragment : Fragment() {
         _binding = null
     }
 
-    private fun setupButtons(){
-        binding.btnWhatsapp.setOnClickListener {
-            viewModel.getMarvelCharactersDetails()
+    private fun setupButtons() {
+        binding.apply {
+            btnWhatsapp.setOnClickListener {
+                viewModel.getMarvelCharactersDetails()
+            }
+
+            errorLayout.retryButton.setOnClickListener {
+                binding.errorLayout.root.hide()
+                viewModel.getMarvelCharactersDetails()
+            }
         }
     }
 }

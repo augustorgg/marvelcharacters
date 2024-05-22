@@ -1,7 +1,7 @@
 [versions]
 agp = "7.4.2"
 core-splashscreen = "1.0.1"
-kotlin = "1.9.0"
+kotlin = "1.9.23"
 androidx-core-ktx = "1.13.1"
 androidx-appcompat = "1.6.1"
 material = "1.12.0"

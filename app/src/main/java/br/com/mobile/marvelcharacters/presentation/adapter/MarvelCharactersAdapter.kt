@@ -1,12 +1,18 @@
+package br.com.mobile.marvelcharacters.presentation.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.mobile.marvelcharacters.R
-import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.databinding.ItemMarvelCharacterBinding
+import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import com.squareup.picasso.Picasso
 
-class MarvelCharactersAdapter(private var characters: List<CharacterResult>?) :
+class MarvelCharactersAdapter(
+    private var characters: List<CharacterResult>?,
+    private val onItemClick: (CharacterResult) -> Unit
+) :
     RecyclerView.Adapter<MarvelCharactersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

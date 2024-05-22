@@ -4,6 +4,9 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin") version "2.7.7"
+    id("kotlin-android")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -73,4 +76,5 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.shimmer)
+//    implementation(libs.androidx.navigation.safe.args.gradle.plugin)
 }

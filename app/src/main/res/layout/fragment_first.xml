@@ -16,30 +16,9 @@
         android:id="@+id/shimmerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/red" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/red" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/red" />
-        </LinearLayout>
+        <include layout="@layout/shimmer_content" />
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 
@@ -55,4 +34,7 @@
         android:src="@drawable/ic_whatsapp"
         android:visibility="gone" />
 
+    <include
+        android:id="@+id/errorLayout"
+        layout="@layout/generic_error"/>
 </RelativeLayout>
