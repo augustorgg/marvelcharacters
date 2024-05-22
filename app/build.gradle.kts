@@ -71,4 +71,6 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.picasso)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.shimmer)
 }

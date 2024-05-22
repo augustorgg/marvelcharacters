@@ -33,7 +33,7 @@ class MarvelCharactersAdapter(private var characters: List<CharacterResult>?) :
             val secureImageUrl = imageUrl.replace("http://", "https://")
             Picasso.get()
                 .load(secureImageUrl)
-                .placeholder(R.drawable.gradient)
+                .placeholder(R.drawable.placeholder_marvel_character)
                 .error(R.drawable.whatsapp)
                 .into(binding.ivItem)
             binding.tvItem.text = characterDetail?.name

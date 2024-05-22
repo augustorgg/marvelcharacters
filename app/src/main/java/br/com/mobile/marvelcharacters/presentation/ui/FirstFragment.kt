@@ -1,11 +1,18 @@
 package br.com.mobile.marvelcharacters.presentation.ui
 
+import MarvelCharactersAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.databinding.FragmentFirstBinding
+import br.com.mobile.marvelcharacters.domain.model.CharacterResult
+import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersViewState
 import br.com.mobile.marvelcharacters.presentation.viewmodel.MarvelCharactersViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,7 +28,6 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -30,9 +36,34 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
-//        binding.buttonFirst.setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
+        setupListeners()
+        viewModel.getMarvelCharactersDetails()
+    }
+
+    private fun setupListeners() {
+        viewModel.viewState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is MarvelCharactersViewState.Loading -> {
+                    Toast.makeText(this.context, "Loading...", Toast.LENGTH_SHORT).show()
+                }
+
+                is MarvelCharactersViewState.Success -> {
+                    setupRecyclerView(state.marvelCharacters)
+                    Toast.makeText(this.context, "Success", Toast.LENGTH_SHORT).show()
+                }
+
+                is MarvelCharactersViewState.Error -> {
+                    Toast.makeText(this.context, "Error: ${state.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun setupRecyclerView(characters: List<CharacterResult>?) {
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = MarvelCharactersAdapter(characters)
+        }
     }
 
     override fun onDestroyView() {
@@ -41,7 +72,7 @@ class FirstFragment : Fragment() {
     }
 
     private fun setupButtons(){
-        binding.buttonFirst.setOnClickListener {
+        binding.btnWhatsapp.setOnClickListener {
             viewModel.getMarvelCharactersDetails()
         }
     }

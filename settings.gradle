@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Anime Facts"
+rootProject.name = "Marvel Characters"
 include ':app'
