@@ -7,7 +7,8 @@ import java.net.URLEncoder
 class WhatsappIntentBuilder {
     companion object {
         private const val DEFAULT_PHONE_NUMBER = "19999660305"
-        private const val DEFAULT_MESSAGE = "Estou tendo problemas com o app Anime Facts, poderia me ajudar?"
+        private const val DEFAULT_MESSAGE =
+            "Estou utilizando o App Marvel Characters e queria mais detalhes sobre..."
     }
 
     private var phoneNumber: String = DEFAULT_PHONE_NUMBER

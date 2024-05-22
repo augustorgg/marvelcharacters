@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Marvel Characters</string>
-    <string name="action_settings">Settings</string>
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="marvel_characters_fragment_label">Marvel Characters Fragment</string>
+    <string name="marvel_character_detail_fragment_label">Marvel Character Detail Fragment</string>
+
+    <string name="generic_error_message">A generic error occurred.</string>
+    <string name="network_error_occurred">Network error occurred.</string>
 </resources>

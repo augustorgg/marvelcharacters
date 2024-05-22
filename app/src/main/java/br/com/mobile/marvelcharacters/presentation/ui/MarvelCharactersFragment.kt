@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.mobile.marvelcharacters.databinding.FragmentFirstBinding
+import br.com.mobile.marvelcharacters.R
+import br.com.mobile.marvelcharacters.data.utils.Logger
+import br.com.mobile.marvelcharacters.databinding.FragmentMarvelCharactersBinding
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.presentation.adapter.MarvelCharactersAdapter
 import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersViewState
@@ -18,9 +20,9 @@ import br.com.mobile.marvelcharacters.presentation.utils.stopShimmering
 import br.com.mobile.marvelcharacters.presentation.viewmodel.MarvelCharactersViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class FirstFragment : Fragment() {
+class MarvelCharactersFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentMarvelCharactersBinding? = null
     private val viewModel: MarvelCharactersViewModel by viewModel()
 
     private val binding get() = _binding!!
@@ -29,7 +31,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentMarvelCharactersBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -74,7 +76,9 @@ class FirstFragment : Fragment() {
             layoutManager = LinearLayoutManager(this.context)
             adapter = MarvelCharactersAdapter(characters) {
                 val action =
-                    FirstFragmentDirections.actionFirstFragmentToSecondFragment(it)
+                    MarvelCharactersFragmentDirections.actionMarvelCharactersFragmentToMarvelCharacterDetailFragment(
+                        it
+                    )
                 findNavController().navigate(action)
             }
         }

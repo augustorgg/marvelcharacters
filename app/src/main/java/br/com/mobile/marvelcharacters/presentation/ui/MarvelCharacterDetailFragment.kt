@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.mobile.marvelcharacters.R
-import br.com.mobile.marvelcharacters.databinding.FragmentSecondBinding
+import br.com.mobile.marvelcharacters.databinding.FragmentMarvelCharacterDetailBinding
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.domain.model.ComicItem
 import br.com.mobile.marvelcharacters.presentation.adapter.MarvelCharacterDetailAdapter
+import br.com.mobile.marvelcharacters.presentation.utils.WhatsappIntentBuilder
+import br.com.mobile.marvelcharacters.presentation.utils.getSecureImageUrl
 import com.squareup.picasso.Picasso
 
-class SecondFragment : Fragment() {
+class MarvelCharacterDetailFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentMarvelCharacterDetailBinding? = null
     private var characterResult: CharacterResult? = null
 
     private val binding get() = _binding!!
@@ -25,7 +27,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentMarvelCharacterDetailBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -37,6 +39,7 @@ class SecondFragment : Fragment() {
             characterResult = bundle.getParcelable(CHARACTER_RESULT)
         }
         setupDetails()
+        setupWhatsappButton()
     }
 
     private fun setupDetails() {
@@ -48,14 +51,11 @@ class SecondFragment : Fragment() {
         setupImage()
     }
 
-    private fun setupImage(){
-        val imageUrl =
-            "${characterResult?.thumbnail?.path}.${characterResult?.thumbnail?.extension}"
-        val secureImageUrl = imageUrl.replace("http://", "https://")
+    private fun setupImage() {
         Picasso.get()
-            .load(secureImageUrl)
+            .load(characterResult.getSecureImageUrl())
             .placeholder(R.drawable.placeholder_marvel_character)
-            .error(R.drawable.whatsapp)
+            .error(R.drawable.alert_error)
             .into(binding.ivHero)
     }
 
@@ -63,6 +63,13 @@ class SecondFragment : Fragment() {
         binding.recyclerViewComics.apply {
             layoutManager = LinearLayoutManager(this.context)
             adapter = MarvelCharacterDetailAdapter(comicItems)
+        }
+    }
+
+    private fun setupWhatsappButton() {
+        binding.btnWhatsapp.setOnClickListener {
+            val intent = WhatsappIntentBuilder().build()
+            startActivity(intent)
         }
     }
 

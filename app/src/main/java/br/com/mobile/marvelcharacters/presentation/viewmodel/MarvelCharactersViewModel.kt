@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.domain.model.onGenericError
 import br.com.mobile.marvelcharacters.domain.model.onNetworkError
 import br.com.mobile.marvelcharacters.domain.model.onSuccess
@@ -27,11 +28,11 @@ class MarvelCharactersViewModel(
             result.onSuccess { marvelCharacters ->
                 _viewState.value = MarvelCharactersViewState.Success(marvelCharacters)
             }
-            result.onGenericError { exception ->
-                _viewState.value = MarvelCharactersViewState.Error(exception.exception.message ?: "An error occurred")
+            result.onGenericError {
+                _viewState.value = MarvelCharactersViewState.Error
             }
             result.onNetworkError {
-                _viewState.value = MarvelCharactersViewState.Error("Network error occurred")
+                _viewState.value = MarvelCharactersViewState.Error
             }
         }
     }

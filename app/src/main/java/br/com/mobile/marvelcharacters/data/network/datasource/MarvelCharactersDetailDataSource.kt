@@ -1,6 +1,7 @@
-package br.com.mobile.marvelcharacters.data.network
+package br.com.mobile.marvelcharacters.data.network.datasource
 
 import br.com.mobile.marvelcharacters.data.model.MarvelApiDataResponse
+import br.com.mobile.marvelcharacters.data.network.api.MarvelCharactersApi
 import br.com.mobile.marvelcharacters.data.service.DataResult
 import br.com.mobile.marvelcharacters.data.utils.Logger
 import java.io.IOException

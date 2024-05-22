@@ -1,16 +1,6 @@
 package br.com.mobile.marvelcharacters.data.model
 
-import com.google.gson.annotations.SerializedName
-
 data class MarvelApiDataResponse(
-    val code: Int?,
-    val status: String?,
-    val copyright: String?,
-    @SerializedName("attributionText")
-    val attributionText: String?,
-    @SerializedName("attributionHTML")
-    val attributionHtml: String?,
-    val etag: String?,
     val data: MarvelCharactersDetailResponse?
 )
 

@@ -11,17 +11,3 @@ sealed class DataResult<out T> {
         val exception: Exception
     ) : DataResult<Nothing>()
 }
-
-inline fun <T : Any> DataResult<T>.onSuccess(action: (T) -> Unit): DataResult<T> {
-    if (this is DataResult.Success) {
-        action(this.value)
-    }
-    return this
-}
-
-inline fun <T : Any> DataResult<T>.onError(action: (DataResult.NetworkError) -> Unit): DataResult<T> {
-    if (this is DataResult.NetworkError) {
-        action(this)
-    }
-    return this
-}

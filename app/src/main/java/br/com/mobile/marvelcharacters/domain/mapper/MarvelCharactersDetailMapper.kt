@@ -31,24 +31,18 @@ object MarvelCharactersDetailMapper {
 
     fun mapFromDataModel(dataModel: MarvelApiDataResponse): MarvelApiData {
         return MarvelApiData(
-            code = dataModel.code,
-            status = dataModel.status,
-            copyright = dataModel.copyright,
-            attributionText = dataModel.attributionText,
-            attributionHtml = dataModel.attributionHtml,
             data = mapDataModelToDomain(dataModel.data),
-            etag = dataModel.etag
         )
     }
 
     private fun mapDataModelToDomain(dataModel: MarvelCharactersDetailResponse?): MarvelCharactersDetail {
         return MarvelCharactersDetail(
-                offset = dataModel?.offset,
-                limit = dataModel?.limit,
-                total = dataModel?.total,
-                count = dataModel?.count,
-                results = mapCharacterResult(dataModel?.results)
-            )
+            offset = dataModel?.offset,
+            limit = dataModel?.limit,
+            total = dataModel?.total,
+            count = dataModel?.count,
+            results = mapCharacterResult(dataModel?.results)
+        )
     }
 
     private fun mapCharacterResult(characterResult: List<CharacterResultResponse>?): List<CharacterResult>? {

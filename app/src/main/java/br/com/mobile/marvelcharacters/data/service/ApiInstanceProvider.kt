@@ -1,8 +1,8 @@
 package br.com.mobile.marvelcharacters.data.service
 
-import br.com.mobile.marvelcharacters.data.network.AuthInterceptor
-import br.com.mobile.marvelcharacters.data.network.GzipInterceptor
-import br.com.mobile.marvelcharacters.data.network.MarvelCharactersApi
+import br.com.mobile.marvelcharacters.data.network.interceptors.AuthInterceptor
+import br.com.mobile.marvelcharacters.data.network.interceptors.GzipInterceptor
+import br.com.mobile.marvelcharacters.data.network.api.MarvelCharactersApi
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

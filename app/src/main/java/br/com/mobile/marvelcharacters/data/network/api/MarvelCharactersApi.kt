@@ -1,4 +1,4 @@
-package br.com.mobile.marvelcharacters.data.network
+package br.com.mobile.marvelcharacters.data.network.api
 
 import br.com.mobile.marvelcharacters.data.model.MarvelApiDataResponse
 import retrofit2.Response

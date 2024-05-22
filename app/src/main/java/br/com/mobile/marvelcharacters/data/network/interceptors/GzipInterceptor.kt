@@ -1,4 +1,4 @@
-package br.com.mobile.marvelcharacters.data.network
+package br.com.mobile.marvelcharacters.data.network.interceptors
 
 import java.util.zip.GZIPInputStream
 import okhttp3.Interceptor

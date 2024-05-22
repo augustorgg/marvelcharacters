@@ -2,11 +2,10 @@ package br.com.mobile.marvelcharacters.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.databinding.ItemMarvelCharacterDetailBinding
 import br.com.mobile.marvelcharacters.domain.model.ComicItem
+import br.com.mobile.marvelcharacters.presentation.utils.ZERO
 
 class MarvelCharacterDetailAdapter(private val comics: List<ComicItem>?) :
     RecyclerView.Adapter<MarvelCharacterDetailAdapter.ViewHolder>() {
@@ -26,7 +25,7 @@ class MarvelCharacterDetailAdapter(private val comics: List<ComicItem>?) :
     }
 
     override fun getItemCount(): Int {
-        return comics?.size ?: 0
+        return comics?.size ?: ZERO
     }
 
     class ViewHolder(binding: ItemMarvelCharacterDetailBinding) :

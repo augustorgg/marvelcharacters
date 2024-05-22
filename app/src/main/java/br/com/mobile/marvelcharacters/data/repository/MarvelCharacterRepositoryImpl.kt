@@ -1,7 +1,8 @@
 package br.com.mobile.marvelcharacters.data.repository
 
-import br.com.mobile.marvelcharacters.data.network.MarvelCharactersDetailDataSource
+import br.com.mobile.marvelcharacters.data.network.datasource.MarvelCharactersDetailDataSource
 import br.com.mobile.marvelcharacters.data.service.DataResult
+import br.com.mobile.marvelcharacters.data.utils.Logger
 import br.com.mobile.marvelcharacters.domain.mapper.MarvelCharactersDetailMapper
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.domain.model.Result
@@ -25,13 +26,18 @@ class MarvelCharacterRepositoryImpl(
                     }
 
                     is DataResult.NetworkError -> {
+                        Logger.logError(result.message)
                         Result.NetworkError(
                             result.message,
                             result.httpStatus
                         )
+
                     }
 
-                    is DataResult.GenericError -> Result.GenericError(result.exception)
+                    is DataResult.GenericError -> {
+                        Logger.logError(result.exception.message, result.exception)
+                        Result.GenericError(result.exception)
+                    }
                 }
             } catch (e: Exception) {
                 Result.GenericError(e)

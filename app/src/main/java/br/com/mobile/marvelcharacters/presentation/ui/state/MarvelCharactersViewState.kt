@@ -7,5 +7,5 @@ sealed class MarvelCharactersViewState {
     data class Success(val marvelCharacters: List<CharacterResult>?) :
         MarvelCharactersViewState()
 
-    data class Error(val message: String) : MarvelCharactersViewState()
+    data object Error : MarvelCharactersViewState()
 }

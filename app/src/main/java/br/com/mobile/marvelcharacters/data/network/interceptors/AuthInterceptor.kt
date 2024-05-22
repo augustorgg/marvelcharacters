@@ -1,4 +1,4 @@
-package br.com.mobile.marvelcharacters.data.network
+package br.com.mobile.marvelcharacters.data.network.interceptors
 
 import br.com.mobile.marvelcharacters.BuildConfig.API_PRIVATE_KEY
 import br.com.mobile.marvelcharacters.BuildConfig.API_PUBLIC_KEY

@@ -1,6 +1,7 @@
 package br.com.mobile.marvelcharacters.presentation.utils
 
 import android.view.View
+import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import com.facebook.shimmer.ShimmerFrameLayout
 
 fun View.show() {
@@ -19,4 +20,11 @@ fun ShimmerFrameLayout.startShimmering() {
 fun ShimmerFrameLayout.stopShimmering() {
     this.stopShimmer()
     this.hide()
+}
+
+fun CharacterResult?.getSecureImageUrl(): String? {
+    return this?.thumbnail?.let { thumbnail ->
+        val imageUrl = "${thumbnail.path}.${thumbnail.extension}"
+        imageUrl.replace("http://", "https://")
+    }
 }

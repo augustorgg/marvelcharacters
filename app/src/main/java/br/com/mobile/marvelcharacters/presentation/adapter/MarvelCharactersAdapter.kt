@@ -2,11 +2,12 @@ package br.com.mobile.marvelcharacters.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.databinding.ItemMarvelCharacterBinding
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
+import br.com.mobile.marvelcharacters.presentation.utils.ZERO
+import br.com.mobile.marvelcharacters.presentation.utils.getSecureImageUrl
 import com.squareup.picasso.Picasso
 
 class MarvelCharactersAdapter(
@@ -27,24 +28,23 @@ class MarvelCharactersAdapter(
     }
 
     override fun getItemCount(): Int {
-        return characters?.size ?: 0
+        return characters?.size ?: ZERO
     }
 
     inner class ViewHolder(private val binding: ItemMarvelCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(characterDetail: CharacterResult?) {
-            val imageUrl =
-                "${characterDetail?.thumbnail?.path}.${characterDetail?.thumbnail?.extension}"
-            val secureImageUrl = imageUrl.replace("http://", "https://")
-            Picasso.get()
-                .load(secureImageUrl)
-                .placeholder(R.drawable.placeholder_marvel_character)
-                .error(R.drawable.whatsapp)
-                .into(binding.ivItem)
-            binding.tvItem.text = characterDetail?.name
-            binding.root.setOnClickListener {
-                onItemClick.invoke(characterDetail)
+            with(binding) {
+                Picasso.get()
+                    .load(characterDetail.getSecureImageUrl())
+                    .placeholder(R.drawable.placeholder_marvel_character)
+                    .error(R.drawable.alert_error)
+                    .into(ivItem)
+                tvItem.text = characterDetail?.name
+                root.setOnClickListener {
+                    onItemClick.invoke(characterDetail)
+                }
             }
         }
     }
