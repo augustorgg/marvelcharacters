@@ -35,8 +35,8 @@ class MarvelCharacterRepositoryImpl(
                     }
 
                     is DataResult.GenericError -> {
-                        Logger.logError(result.exception.message, result.exception)
-                        Result.GenericError(result.exception)
+                        Logger.logError(result.exception?.message, result.exception)
+                        Result.GenericError(exception = result.exception)
                     }
                 }
             } catch (e: Exception) {

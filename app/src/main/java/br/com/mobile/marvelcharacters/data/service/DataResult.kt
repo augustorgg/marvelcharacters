@@ -8,6 +8,8 @@ sealed class DataResult<out T> {
     ) : DataResult<Nothing>()
 
     data class GenericError(
-        val exception: Exception
+        val message: String = "Generic Error",
+        val httpStatus: Int = 500,
+        val exception: Exception? = null
     ) : DataResult<Nothing>()
 }

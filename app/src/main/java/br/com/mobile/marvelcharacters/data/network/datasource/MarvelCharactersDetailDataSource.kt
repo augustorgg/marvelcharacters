@@ -17,7 +17,7 @@ class MarvelCharactersDetailDataSource(private val api: MarvelCharactersApi) {
                 if (body != null) {
                     DataResult.Success(body)
                 } else {
-                    DataResult.NetworkError("Empty response body", response.code())
+                    DataResult.GenericError("Empty response body", response.code())
                 }
             } else {
                 val errorMessage = "API call failed: ${response.message()}"

@@ -20,6 +20,10 @@ android {
         throw FileNotFoundException("key.properties file not found in root project directory.")
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.isReturnDefaultValues = true
+    }
 
     namespace = "br.com.mobile.marvelcharacters"
     compileSdk = 34
@@ -59,6 +63,10 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -67,7 +75,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.androidx.work.runtime.ktx)
-    testImplementation(libs.junit)
+    implementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.koin.android)
@@ -76,5 +85,7 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.shimmer)
-//    implementation(libs.androidx.navigation.safe.args.gradle.plugin)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.core.testing)
 }
