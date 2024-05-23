@@ -28,7 +28,6 @@ import br.com.mobile.marvelcharacters.domain.model.Thumbnail
 import br.com.mobile.marvelcharacters.domain.model.Url
 
 object MarvelCharactersDetailMapper {
-
     fun mapFromDataModel(dataModel: MarvelApiDataResponse): MarvelApiData {
         return MarvelApiData(
             data = mapDataModelToDomain(dataModel.data),
@@ -41,7 +40,7 @@ object MarvelCharactersDetailMapper {
             limit = dataModel?.limit,
             total = dataModel?.total,
             count = dataModel?.count,
-            results = mapCharacterResult(dataModel?.results)
+            results = mapCharacterResult(dataModel?.results),
         )
     }
 
@@ -58,7 +57,7 @@ object MarvelCharactersDetailMapper {
                 comics = mapComics(dataMode.comics),
                 stories = mapStories(dataMode.stories),
                 events = mapEvents(dataMode.events),
-                series = mapSeries(dataMode.series)
+                series = mapSeries(dataMode.series),
             )
         }
     }
@@ -66,14 +65,14 @@ object MarvelCharactersDetailMapper {
     private fun mapUrl(url: UrlResponse): Url {
         return Url(
             type = url.type,
-            url = url.url
+            url = url.url,
         )
     }
 
     private fun mapThumbnail(thumbnail: ThumbnailResponse?): Thumbnail {
         return Thumbnail(
             path = thumbnail?.path,
-            extension = thumbnail?.extension
+            extension = thumbnail?.extension,
         )
     }
 
@@ -82,14 +81,14 @@ object MarvelCharactersDetailMapper {
             available = comics?.available,
             returned = comics?.returned,
             collectionURI = comics?.collectionURI,
-            items = comics?.items?.map { mapComicItem(it) }
+            items = comics?.items?.map { mapComicItem(it) },
         )
     }
 
     private fun mapComicItem(comicItem: ComicItemResponse?): ComicItem {
         return ComicItem(
             resourceURI = comicItem?.resourceURI,
-            name = comicItem?.name
+            name = comicItem?.name,
         )
     }
 
@@ -98,7 +97,7 @@ object MarvelCharactersDetailMapper {
             available = stories?.available,
             returned = stories?.returned,
             collectionURI = stories?.collectionURI,
-            items = stories?.items?.map { mapStoryItem(it) }
+            items = stories?.items?.map { mapStoryItem(it) },
         )
     }
 
@@ -106,7 +105,7 @@ object MarvelCharactersDetailMapper {
         return StoryItem(
             resourceURI = storyItem?.resourceURI,
             name = storyItem?.name,
-            type = storyItem?.type
+            type = storyItem?.type,
         )
     }
 
@@ -115,14 +114,14 @@ object MarvelCharactersDetailMapper {
             available = events?.available,
             returned = events?.returned,
             collectionURI = events?.collectionURI,
-            items = events?.items?.map { mapEventItem(it) }
+            items = events?.items?.map { mapEventItem(it) },
         )
     }
 
     private fun mapEventItem(eventItem: EventItemResponse?): EventItem {
         return EventItem(
             resourceURI = eventItem?.resourceURI,
-            name = eventItem?.name
+            name = eventItem?.name,
         )
     }
 
@@ -131,14 +130,14 @@ object MarvelCharactersDetailMapper {
             available = series?.available,
             returned = series?.returned,
             collectionURI = series?.collectionURI,
-            items = series?.items?.map { mapSeriesItem(it) }
+            items = series?.items?.map { mapSeriesItem(it) },
         )
     }
 
     private fun mapSeriesItem(seriesItem: SeriesItemResponse?): SeriesItem {
         return SeriesItem(
             resourceURI = seriesItem?.resourceURI,
-            name = seriesItem?.name
+            name = seriesItem?.name,
         )
     }
 }

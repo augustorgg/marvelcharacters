@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 class GetMarvelCharacterUseCaseTest {
-
     private lateinit var useCase: GetMarvelCharacterUseCase
     private lateinit var repository: MarvelCharacterRepository
     private val testScheduler = TestCoroutineScheduler()
@@ -31,42 +30,45 @@ class GetMarvelCharacterUseCaseTest {
     }
 
     @Test
-    fun `invoke returns success result`() = runTest(testScheduler) {
-        val mockCharacterResultList = listOf(mockk<CharacterResult>())
-        val expectedResult = Result.Success(mockCharacterResultList)
+    fun `invoke returns success result`() =
+        runTest(testScheduler) {
+            val mockCharacterResultList = listOf(mockk<CharacterResult>())
+            val expectedResult = Result.Success(mockCharacterResultList)
 
-        coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
+            coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
 
-        val result = useCase()
+            val result = useCase()
 
-        assertEquals(expectedResult, result)
-        coVerify { repository.getMarvelCharactersDetail() }
-    }
-
-    @Test
-    fun `invoke returns network error result`() = runTest(testScheduler) {
-        val errorMessage = "Network error"
-        val statusCode = 404
-        val expectedResult = Result.NetworkError(errorMessage, statusCode)
-
-        coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
-
-        val result = useCase()
-
-        assertEquals(expectedResult, result)
-        coVerify { repository.getMarvelCharactersDetail() }
-    }
+            assertEquals(expectedResult, result)
+            coVerify { repository.getMarvelCharactersDetail() }
+        }
 
     @Test
-    fun `invoke returns generic error result`() = runTest(testScheduler) {
-        val exception = Exception("Generic error")
-        val expectedResult = Result.GenericError(exception)
+    fun `invoke returns network error result`() =
+        runTest(testScheduler) {
+            val errorMessage = "Network error"
+            val statusCode = 404
+            val expectedResult = Result.NetworkError(errorMessage, statusCode)
 
-        coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
+            coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
 
-        val result = useCase()
+            val result = useCase()
 
-        assertEquals(expectedResult, result)
-        coVerify { repository.getMarvelCharactersDetail() }
-    }
+            assertEquals(expectedResult, result)
+            coVerify { repository.getMarvelCharactersDetail() }
+        }
+
+    @Test
+    fun `invoke returns generic error result`() =
+        runTest(testScheduler) {
+            val exception = Exception("Generic error")
+            val expectedResult = Result.GenericError(exception)
+
+            coEvery { repository.getMarvelCharactersDetail() } returns expectedResult
+
+            val result = useCase()
+
+            assertEquals(expectedResult, result)
+            coVerify { repository.getMarvelCharactersDetail() }
+        }
 }

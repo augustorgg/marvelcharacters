@@ -13,16 +13,15 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
 import io.mockk.unmockkAll
-import java.io.IOException
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import retrofit2.Response
+import java.io.IOException
 
 class MarvelCharactersDetailDataSourceTest {
-
     @MockK
     private lateinit var mockApi: MarvelCharactersApi
 
@@ -42,32 +41,34 @@ class MarvelCharactersDetailDataSourceTest {
     }
 
     @Test
-    fun `test getMarvelCharacterDetail success`() = runBlocking {
-        val mockMarvelCharactersDetailResponse = mockk<MarvelCharactersDetailResponse>()
+    fun `test getMarvelCharacterDetail success`() =
+        runBlocking {
+            val mockMarvelCharactersDetailResponse = mockk<MarvelCharactersDetailResponse>()
 
-        val mockResponse = MarvelApiDataResponse(mockMarvelCharactersDetailResponse)
-        coEvery { mockApi.getCharactersDetail() } returns Response.success(mockResponse)
+            val mockResponse = MarvelApiDataResponse(mockMarvelCharactersDetailResponse)
+            coEvery { mockApi.getCharactersDetail() } returns Response.success(mockResponse)
 
-        val result = runBlocking { dataSource.getMarvelCharacterDetail() }
+            val result = runBlocking { dataSource.getMarvelCharacterDetail() }
 
-        Assertions.assertEquals(DataResult.Success(mockResponse), result)
-    }
+            Assertions.assertEquals(DataResult.Success(mockResponse), result)
+        }
 
     @Test
-    fun `test getMarvelCharacterDetail api error failure`() = runBlocking {
-        val mockResponse: Response<MarvelApiDataResponse> = mockk()
+    fun `test getMarvelCharacterDetail api error failure`() =
+        runBlocking {
+            val mockResponse: Response<MarvelApiDataResponse> = mockk()
 
-        every { mockResponse.isSuccessful } returns false
-        every { mockResponse.message() } returns "api error"
-        every { mockResponse.code() } returns 404
+            every { mockResponse.isSuccessful } returns false
+            every { mockResponse.message() } returns "api error"
+            every { mockResponse.code() } returns 404
 
-        coEvery { mockApi.getCharactersDetail() } returns mockResponse
+            coEvery { mockApi.getCharactersDetail() } returns mockResponse
 
-        val result = runBlocking { dataSource.getMarvelCharacterDetail() }
+            val result = runBlocking { dataSource.getMarvelCharacterDetail() }
 
-        val expectedError = DataResult.NetworkError("API call failed: api error", 404)
-        Assertions.assertEquals(expectedError, result)
-    }
+            val expectedError = DataResult.NetworkError("API call failed: api error", 404)
+            Assertions.assertEquals(expectedError, result)
+        }
 
     @Test
     fun `test getMarvelCharacterDetail empty response`() {

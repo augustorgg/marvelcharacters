@@ -25,7 +25,6 @@ import org.junit.jupiter.api.extension.ExtendWith
 
 @ExtendWith(InstantTaskExecutorRuleForJUnit5::class)
 class MarvelCharactersViewModelTest {
-
     private lateinit var useCase: GetMarvelCharacterUseCase
 
     private val testScheduler = TestCoroutineScheduler()
@@ -54,45 +53,56 @@ class MarvelCharactersViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `test getMarvelCharactersDetails success`() = runTest(testScheduler) {
-        val mockCharacterList = listOf<CharacterResult>()
-        val expectedResult = Result.Success(mockCharacterList)
-        coEvery { useCase() } returns expectedResult
+    fun `test getMarvelCharactersDetails success`() =
+        runTest(testScheduler) {
+            val mockCharacterList = listOf<CharacterResult>()
+            val expectedResult = Result.Success(mockCharacterList)
+            coEvery { useCase() } returns expectedResult
 
-        viewModel.getMarvelCharactersDetails()
-        testScheduler.apply { advanceTimeBy(1000); runCurrent() }
+            viewModel.getMarvelCharactersDetails()
+            testScheduler.apply {
+                advanceTimeBy(1000)
+                runCurrent()
+            }
 
-        val expectedViewState = MarvelCharactersViewState.Success(mockCharacterList)
-        Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
-    }
-
-    @OptIn(ExperimentalCoroutinesApi::class)
-    @Test
-    fun `test getMarvelCharactersDetails network error`() = runTest(testScheduler) {
-        val errorMessage = "Network error"
-        val statusCode = 404
-        val expectedResult = Result.NetworkError(errorMessage, statusCode)
-        coEvery { useCase() } returns expectedResult
-
-        viewModel.getMarvelCharactersDetails()
-        testScheduler.apply { advanceTimeBy(1000); runCurrent() }
-
-        val expectedViewState = MarvelCharactersViewState.Error
-        Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
-    }
+            val expectedViewState = MarvelCharactersViewState.Success(mockCharacterList)
+            Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
+        }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `test getMarvelCharactersDetails generic error`() = runTest(testScheduler) {
-        val exception = Exception("Generic error")
-        val expectedResult = Result.GenericError(exception)
-        coEvery { useCase() } returns expectedResult
+    fun `test getMarvelCharactersDetails network error`() =
+        runTest(testScheduler) {
+            val errorMessage = "Network error"
+            val statusCode = 404
+            val expectedResult = Result.NetworkError(errorMessage, statusCode)
+            coEvery { useCase() } returns expectedResult
 
-        viewModel.getMarvelCharactersDetails()
-        testScheduler.apply { advanceTimeBy(1000); runCurrent() }
+            viewModel.getMarvelCharactersDetails()
+            testScheduler.apply {
+                advanceTimeBy(1000)
+                runCurrent()
+            }
 
-        val expectedViewState = MarvelCharactersViewState.Error
-        Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
-    }
+            val expectedViewState = MarvelCharactersViewState.Error
+            Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
+        }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `test getMarvelCharactersDetails generic error`() =
+        runTest(testScheduler) {
+            val exception = Exception("Generic error")
+            val expectedResult = Result.GenericError(exception)
+            coEvery { useCase() } returns expectedResult
+
+            viewModel.getMarvelCharactersDetails()
+            testScheduler.apply {
+                advanceTimeBy(1000)
+                runCurrent()
+            }
+
+            val expectedViewState = MarvelCharactersViewState.Error
+            Assertions.assertEquals(expectedViewState, viewModel.viewState.value)
+        }
 }

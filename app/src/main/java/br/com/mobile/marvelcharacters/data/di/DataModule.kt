@@ -6,9 +6,9 @@ import br.com.mobile.marvelcharacters.data.service.ApiInstanceProvider
 import br.com.mobile.marvelcharacters.domain.repository.MarvelCharacterRepository
 import org.koin.dsl.module
 
-val dataModule = module {
-    single { ApiInstanceProvider.marvelCharactersApi }
-    single { MarvelCharactersDetailDataSource(get()) }
-    single<MarvelCharacterRepository> { MarvelCharacterRepositoryImpl(get(), get()) }
-}
-
+val dataModule =
+    module {
+        single { ApiInstanceProvider.marvelCharactersApi }
+        single { MarvelCharactersDetailDataSource(get()) }
+        single<MarvelCharacterRepository> { MarvelCharacterRepositoryImpl(get(), get()) }
+    }

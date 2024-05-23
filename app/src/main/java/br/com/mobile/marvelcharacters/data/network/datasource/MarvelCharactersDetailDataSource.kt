@@ -4,11 +4,10 @@ import br.com.mobile.marvelcharacters.data.model.MarvelApiDataResponse
 import br.com.mobile.marvelcharacters.data.network.api.MarvelCharactersApi
 import br.com.mobile.marvelcharacters.data.service.DataResult
 import br.com.mobile.marvelcharacters.data.utils.Logger
-import java.io.IOException
 import retrofit2.Response
+import java.io.IOException
 
 class MarvelCharactersDetailDataSource(private val api: MarvelCharactersApi) {
-
     private suspend fun <T> handleApiCall(call: suspend () -> Response<T>): DataResult<T> {
         return try {
             val response = call()

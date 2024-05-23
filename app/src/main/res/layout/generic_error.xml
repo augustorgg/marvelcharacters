@@ -7,7 +7,6 @@
     android:visibility="gone"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/errorImage"
         android:layout_width="300dp"

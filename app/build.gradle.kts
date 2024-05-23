@@ -4,7 +4,8 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("androidx.navigation.safeargs.kotlin") version "2.7.7"
+    alias(libs.plugins.androidx.navigation.safeargs)
+    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
     id("kotlin-android")
     id("kotlin-parcelize")
 }
@@ -46,7 +47,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -88,4 +89,5 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.core.testing)
+    implementation(libs.gradle)
 }

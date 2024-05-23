@@ -16,23 +16,24 @@ import br.com.mobile.marvelcharacters.presentation.utils.getSecureImageUrl
 import com.squareup.picasso.Picasso
 
 class MarvelCharacterDetailFragment : Fragment() {
-
     private var _binding: FragmentMarvelCharacterDetailBinding? = null
     private var characterResult: CharacterResult? = null
 
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-
         _binding = FragmentMarvelCharacterDetailBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let { bundle ->

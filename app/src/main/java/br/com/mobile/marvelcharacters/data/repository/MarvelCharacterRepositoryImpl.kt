@@ -12,9 +12,8 @@ import kotlinx.coroutines.withContext
 
 class MarvelCharacterRepositoryImpl(
     private val dataSource: MarvelCharactersDetailDataSource,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
 ) : MarvelCharacterRepository {
-
     override suspend fun getMarvelCharactersDetail(): Result<List<CharacterResult>?> {
         return withContext(ioDispatcher) {
             try {
@@ -29,9 +28,8 @@ class MarvelCharacterRepositoryImpl(
                         Logger.logError(result.message)
                         Result.NetworkError(
                             result.message,
-                            result.httpStatus
+                            result.httpStatus,
                         )
-
                     }
 
                     is DataResult.GenericError -> {

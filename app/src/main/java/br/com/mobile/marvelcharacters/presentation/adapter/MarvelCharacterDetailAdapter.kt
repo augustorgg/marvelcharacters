@@ -9,18 +9,23 @@ import br.com.mobile.marvelcharacters.presentation.utils.ZERO
 
 class MarvelCharacterDetailAdapter(private val comics: List<ComicItem>?) :
     RecyclerView.Adapter<MarvelCharacterDetailAdapter.ViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val binding =
             ItemMarvelCharacterDetailBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
-                false
+                false,
             )
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         holder.bind(comics?.get(position))
     }
 
