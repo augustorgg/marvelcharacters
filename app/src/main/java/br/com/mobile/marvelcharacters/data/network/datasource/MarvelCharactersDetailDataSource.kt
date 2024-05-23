@@ -4,10 +4,14 @@ import br.com.mobile.marvelcharacters.data.model.MarvelApiDataResponse
 import br.com.mobile.marvelcharacters.data.network.api.MarvelCharactersApi
 import br.com.mobile.marvelcharacters.data.service.DataResult
 import br.com.mobile.marvelcharacters.data.utils.Logger
-import retrofit2.Response
 import java.io.IOException
+import retrofit2.Response
 
 class MarvelCharactersDetailDataSource(private val api: MarvelCharactersApi) {
+    suspend fun getMarvelCharacterDetail(): DataResult<MarvelApiDataResponse> {
+        return handleApiCall { api.getCharactersDetail() }
+    }
+
     private suspend fun <T> handleApiCall(call: suspend () -> Response<T>): DataResult<T> {
         return try {
             val response = call()
@@ -32,9 +36,5 @@ class MarvelCharactersDetailDataSource(private val api: MarvelCharactersApi) {
             Logger.logError(errorMessage)
             DataResult.NetworkError(errorMessage)
         }
-    }
-
-    suspend fun getMarvelCharacterDetail(): DataResult<MarvelApiDataResponse> {
-        return handleApiCall { api.getCharactersDetail() }
     }
 }

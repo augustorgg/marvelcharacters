@@ -41,7 +41,7 @@ class MarvelCharactersDetailDataSourceTest {
     }
 
     @Test
-    fun `test getMarvelCharacterDetail success`() =
+    fun `test getMarvelCharactersDetail success`() =
         runBlocking {
             val mockMarvelCharactersDetailResponse = mockk<MarvelCharactersDetailResponse>()
 
@@ -54,7 +54,7 @@ class MarvelCharactersDetailDataSourceTest {
         }
 
     @Test
-    fun `test getMarvelCharacterDetail api error failure`() =
+    fun `test getMarvelCharactersDetail api error failure`() =
         runBlocking {
             val mockResponse: Response<MarvelApiDataResponse> = mockk()
 
@@ -71,7 +71,7 @@ class MarvelCharactersDetailDataSourceTest {
         }
 
     @Test
-    fun `test getMarvelCharacterDetail empty response`() {
+    fun `test getMarvelCharactersDetail empty response`() {
         val mockResponse: Response<MarvelApiDataResponse> = mockk()
 
         every { mockResponse.isSuccessful } returns true
@@ -86,7 +86,7 @@ class MarvelCharactersDetailDataSourceTest {
     }
 
     @Test
-    fun `test getMarvelCharacterDetail IOException`() {
+    fun `test getMarvelCharactersDetail IOException`() {
         coEvery { mockApi.getCharactersDetail() } throws IOException("Network error")
 
         val result = runBlocking { dataSource.getMarvelCharacterDetail() }
@@ -96,7 +96,7 @@ class MarvelCharactersDetailDataSourceTest {
     }
 
     @Test
-    fun `test getMarvelCharacterDetail generic exception`() {
+    fun `test getMarvelCharactersDetail generic exception`() {
         coEvery { mockApi.getCharactersDetail() } throws Exception("Unexpected error")
 
         val result = runBlocking { dataSource.getMarvelCharacterDetail() }
