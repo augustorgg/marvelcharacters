@@ -5,4 +5,17 @@
 
     <string name="generic_error_message">A generic error occurred.</string>
     <string name="network_error_occurred">Network error occurred.</string>
+    <string name="hero_name">Nome do Herói</string>
+    <string name="hero_description">Descrição do Herói</string>
+    <string name="hero_comics">Comics</string>
+    <string name="error_title">Tivemos um erro por aqui</string>
+    <string name="error_description">Ocorreu um erro inesperado. Estamos trabalhando para resolver isso o mais rápido possível. Pedimos desculpas pelo inconveniente. Por favor, tente novamente mais tarde.</string>
+    <string name="try_again_button_text">Tente novamente</string>
+    <string name="marvel_characters">Marvel Characters</string>
+    <string name="iv_hero_description">Imagem do herói</string>
+    <string name="btn_whatsapp_description">Botão do Whatsapp</string>
+    <string name="btn_back_description">Botão de voltar</string>
+    <string name="error_image_description">Imagem do Homem-Aranha em uma posição de frustração, simbolizando um erro ou problema na aplicação.</string>
+
+    <string name="hero_without_description">Unfortunately, the hero is currently without a description.</string>
 </resources>

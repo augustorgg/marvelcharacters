@@ -8,7 +8,8 @@
     <ImageView
         android:id="@+id/ivItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:contentDescription="@string/iv_hero_description" />
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"

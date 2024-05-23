@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/irish_grover_regular"
-            android:text="Marvel Characters"
+            android:text="@string/marvel_characters"
             android:textColor="@color/red"
             android:textSize="35sp" />
     </androidx.appcompat.widget.Toolbar>

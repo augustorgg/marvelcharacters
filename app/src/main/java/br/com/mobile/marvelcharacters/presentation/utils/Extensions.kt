@@ -28,3 +28,7 @@ fun CharacterResult?.getSecureImageUrl(): String? {
         imageUrl.replace("http://", "https://")
     }
 }
+
+fun String?.orIfNullOrEmpty(defaultValue: String): String {
+    return if (this.isNullOrEmpty()) defaultValue else this
+}

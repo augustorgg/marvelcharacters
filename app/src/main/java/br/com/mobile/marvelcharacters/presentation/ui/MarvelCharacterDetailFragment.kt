@@ -13,6 +13,7 @@ import br.com.mobile.marvelcharacters.domain.model.ComicItem
 import br.com.mobile.marvelcharacters.presentation.adapter.MarvelCharacterDetailAdapter
 import br.com.mobile.marvelcharacters.presentation.utils.WhatsappIntentBuilder
 import br.com.mobile.marvelcharacters.presentation.utils.getSecureImageUrl
+import br.com.mobile.marvelcharacters.presentation.utils.orIfNullOrEmpty
 import com.squareup.picasso.Picasso
 
 class MarvelCharacterDetailFragment : Fragment() {
@@ -40,13 +41,14 @@ class MarvelCharacterDetailFragment : Fragment() {
             characterResult = bundle.getParcelable(CHARACTER_RESULT)
         }
         setupDetails()
-        setupWhatsappButton()
+        setupButtons()
     }
 
     private fun setupDetails() {
         binding.apply {
             textViewTitle.text = characterResult?.name
-            textViewDescription.text = characterResult?.description
+            textViewDescription.text =
+                characterResult?.description.orIfNullOrEmpty(getString(R.string.hero_without_description))
             setupRecyclerView(characterResult?.comics?.items)
         }
         setupImage()
@@ -67,10 +69,15 @@ class MarvelCharacterDetailFragment : Fragment() {
         }
     }
 
-    private fun setupWhatsappButton() {
-        binding.btnWhatsapp.setOnClickListener {
-            val intent = WhatsappIntentBuilder().build()
-            startActivity(intent)
+    private fun setupButtons() {
+        binding.apply {
+            btnWhatsapp.setOnClickListener {
+                val intent = WhatsappIntentBuilder().build()
+                startActivity(intent)
+            }
+            btnBack.setOnClickListener {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 

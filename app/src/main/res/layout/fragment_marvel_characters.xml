@@ -9,7 +9,6 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnWhatsapp"
         tools:listitem="@layout/item_marvel_character" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
@@ -20,19 +19,6 @@
 
         <include layout="@layout/shimmer_content" />
     </com.facebook.shimmer.ShimmerFrameLayout>
-
-
-    <ImageButton
-        android:id="@+id/btnWhatsapp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:background="?android:selectableItemBackground"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_whatsapp"
-        android:visibility="gone" />
 
     <include
         android:id="@+id/errorLayout"

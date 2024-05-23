@@ -87,9 +87,6 @@ class MarvelCharactersFragment : Fragment() {
 
     private fun setupButtons() {
         binding.apply {
-            btnWhatsapp.setOnClickListener {
-                viewModel.getMarvelCharactersDetails()
-            }
             errorLayout.retryButton.setOnClickListener {
                 binding.errorLayout.root.hide()
                 viewModel.getMarvelCharactersDetails()
