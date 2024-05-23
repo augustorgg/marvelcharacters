@@ -12,7 +12,7 @@ import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersView
 import kotlinx.coroutines.launch
 
 class MarvelCharactersViewModel(
-    private val getMarvelCharacterUseCase: GetMarvelCharacterUseCase,
+    private val getMarvelCharacterUseCaseImpl: GetMarvelCharacterUseCase,
 ) : ViewModel() {
     private val _viewState = MutableLiveData<MarvelCharactersViewState>()
     val viewState: LiveData<MarvelCharactersViewState> = _viewState
@@ -21,7 +21,7 @@ class MarvelCharactersViewModel(
         _viewState.value = MarvelCharactersViewState.Loading
 
         viewModelScope.launch {
-            val result = getMarvelCharacterUseCase()
+            val result = getMarvelCharacterUseCaseImpl()
 
             result.onSuccess { marvelCharacters ->
                 _viewState.value = MarvelCharactersViewState.Success(marvelCharacters)

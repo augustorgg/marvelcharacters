@@ -4,6 +4,7 @@ import androidx.lifecycle.Observer
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.domain.model.Result
 import br.com.mobile.marvelcharacters.domain.usecase.GetMarvelCharacterUseCase
+import br.com.mobile.marvelcharacters.domain.usecase.GetMarvelCharacterUseCaseImpl
 import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersViewState
 import br.com.mobile.marvelcharacters.presentation.utils.InstantTaskExecutorRuleForJUnit5
 import io.mockk.MockKAnnotations
@@ -37,7 +38,7 @@ class MarvelCharactersViewModelTest {
     fun setUp() {
         MockKAnnotations.init()
         Dispatchers.setMain(testDispatcher)
-        useCase = mockk<GetMarvelCharacterUseCase>()
+        useCase = mockk<GetMarvelCharacterUseCaseImpl>()
         viewModel = MarvelCharactersViewModel(useCase)
 
         viewStateObserver = mockk(relaxed = true)

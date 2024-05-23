@@ -16,7 +16,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
-class GetMarvelCharacterUseCaseTest {
+class GetMarvelCharacterUseCaseImplTest {
     private lateinit var useCase: GetMarvelCharacterUseCase
     private lateinit var repository: MarvelCharacterRepository
     private val testScheduler = TestCoroutineScheduler()
@@ -26,7 +26,7 @@ class GetMarvelCharacterUseCaseTest {
     fun setup() {
         MockKAnnotations.init(this)
         repository = mockk()
-        useCase = GetMarvelCharacterUseCase(repository, testDispatcher)
+        useCase = GetMarvelCharacterUseCaseImpl(repository, testDispatcher)
     }
 
     @Test
