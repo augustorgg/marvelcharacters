@@ -13,10 +13,10 @@ O Marvel Characters App é um aplicativo desenvolvido para fornecer aos usuário
 
 ## Capturas de Tela
 <div style="display: flex;">
-  <img src="app%2Fsrc%2Fmain%2Fres%2Fscreenshot%2FScreenshot_1.jpg" width="300" style="margin-right: 10px;">
-  <img src="app%2Fsrc%2Fmain%2Fres%2Fscreenshot%2FScreenshot_2.jpg" width="300" style="margin-right: 10px;">
-  <img src="app%2Fsrc%2Fmain%2Fres%2Fscreenshot%2FScreenshot_3.jpg" width="300" style="margin-right: 10px;">
-  <img src="app%2Fsrc%2Fmain%2Fres%2Fscreenshot%2FScreenshot_4.jpg" width="300">
+  <img src="app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fscreenshot_1.webp" width="300" style="margin-right: 10px;">
+  <img src="app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fscreenshot_2.webp" width="300" style="margin-right: 10px;">
+  <img src="app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fscreenshot_3.webp" width="300" style="margin-right: 10px;">
+  <img src="app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fscreenshot_4.webp" width="300">
 </div>
 
 ## Requisitos
@@ -53,11 +53,11 @@ O projeto faz uso das seguintes dependências:
 - Retrofit
 - Converter Gson
 - Picasso
-- AndroidX Core Splashscreen
 - Shimmer
 - MockK para testes de mocking
 - kotlinx.coroutines.test para testes de coroutines
 - AndroidX Core Testing
+- Ktlint para análise estática de código
 
 # Estrutura de Arquitetura
 
