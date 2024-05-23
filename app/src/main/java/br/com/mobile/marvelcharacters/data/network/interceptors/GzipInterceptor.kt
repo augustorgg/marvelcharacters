@@ -1,9 +1,9 @@
 package br.com.mobile.marvelcharacters.data.network.interceptors
 
-import java.util.zip.GZIPInputStream
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
+import java.util.zip.GZIPInputStream
 
 class GzipInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

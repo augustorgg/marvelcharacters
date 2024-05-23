@@ -26,7 +26,6 @@ import org.junit.jupiter.api.Test
 
 @ExperimentalCoroutinesApi
 class MarvelCharacterRepositoryImplTest {
-
     @MockK
     private lateinit var dataSource: MarvelCharactersDetailDataSource
     private lateinit var repository: MarvelCharacterRepository
@@ -42,60 +41,65 @@ class MarvelCharacterRepositoryImplTest {
     }
 
     @Test
-    fun `test getMarvelCharactersDetail success`() = runTest(testScheduler) {
-        val mockResponse = mockk<MarvelApiDataResponse>(relaxed = true)
-        val domainModelList = MarvelCharactersDetailMapper.mapFromDataModel(mockResponse)
-        val expected = Result.Success(domainModelList.data?.results)
+    fun `test getMarvelCharactersDetail success`() =
+        runTest(testScheduler) {
+            val mockResponse = mockk<MarvelApiDataResponse>(relaxed = true)
+            val domainModelList = MarvelCharactersDetailMapper.mapFromDataModel(mockResponse)
+            val expected = Result.Success(domainModelList.data?.results)
 
-        coEvery { dataSource.getMarvelCharacterDetail() } returns DataResult.Success(mockResponse)
+            coEvery { dataSource.getMarvelCharacterDetail() } returns DataResult.Success(mockResponse)
 
-        val result = repository.getMarvelCharactersDetail()
+            val result = repository.getMarvelCharactersDetail()
 
-        Assertions.assertEquals(expected, result)
-        coVerify { dataSource.getMarvelCharacterDetail() }
-    }
-
-    @Test
-    fun `test getMarvelCharactersDetail network error`() = runTest(testScheduler) {
-        val errorMessage = "Network error"
-        val statusCode = 404
-
-        coEvery { dataSource.getMarvelCharacterDetail() } returns DataResult.NetworkError(
-            errorMessage,
-            statusCode
-        )
-
-        val result = repository.getMarvelCharactersDetail()
-
-        Assertions.assertTrue(result is Result.NetworkError)
-        Assertions.assertEquals(errorMessage, (result as Result.NetworkError).message)
-        Assertions.assertEquals(statusCode, result.httpStatus)
-        coVerify { dataSource.getMarvelCharacterDetail() }
-    }
+            Assertions.assertEquals(expected, result)
+            coVerify { dataSource.getMarvelCharacterDetail() }
+        }
 
     @Test
-    fun `test getMarvelCharactersDetail generic error`() = runTest(testScheduler) {
-        val exception = Exception("Generic error")
+    fun `test getMarvelCharactersDetail network error`() =
+        runTest(testScheduler) {
+            val errorMessage = "Network error"
+            val statusCode = 404
 
-        coEvery { dataSource.getMarvelCharacterDetail() } returns DataResult.GenericError(exception = exception)
+            coEvery { dataSource.getMarvelCharacterDetail() } returns
+                DataResult.NetworkError(
+                    errorMessage,
+                    statusCode,
+                )
 
-        val result = repository.getMarvelCharactersDetail()
+            val result = repository.getMarvelCharactersDetail()
 
-        Assertions.assertTrue(result is Result.GenericError)
-        Assertions.assertEquals(exception, (result as Result.GenericError).exception)
-        coVerify { dataSource.getMarvelCharacterDetail() }
-    }
+            Assertions.assertTrue(result is Result.NetworkError)
+            Assertions.assertEquals(errorMessage, (result as Result.NetworkError).message)
+            Assertions.assertEquals(statusCode, result.httpStatus)
+            coVerify { dataSource.getMarvelCharacterDetail() }
+        }
 
     @Test
-    fun `test getMarvelCharactersDetail unexpected exception`() = runTest(testScheduler) {
-        val exception = Exception("Unexpected error")
+    fun `test getMarvelCharactersDetail generic error`() =
+        runTest(testScheduler) {
+            val exception = Exception("Generic error")
 
-        coEvery { dataSource.getMarvelCharacterDetail() } throws exception
+            coEvery { dataSource.getMarvelCharacterDetail() } returns DataResult.GenericError(exception = exception)
 
-        val result = repository.getMarvelCharactersDetail()
+            val result = repository.getMarvelCharactersDetail()
 
-        Assertions.assertTrue(result is Result.GenericError)
-        Assertions.assertEquals(exception, (result as Result.GenericError).exception)
-        coVerify { dataSource.getMarvelCharacterDetail() }
-    }
+            Assertions.assertTrue(result is Result.GenericError)
+            Assertions.assertEquals(exception, (result as Result.GenericError).exception)
+            coVerify { dataSource.getMarvelCharacterDetail() }
+        }
+
+    @Test
+    fun `test getMarvelCharactersDetail unexpected exception`() =
+        runTest(testScheduler) {
+            val exception = Exception("Unexpected error")
+
+            coEvery { dataSource.getMarvelCharacterDetail() } throws exception
+
+            val result = repository.getMarvelCharactersDetail()
+
+            Assertions.assertTrue(result is Result.GenericError)
+            Assertions.assertEquals(exception, (result as Result.GenericError).exception)
+            coVerify { dataSource.getMarvelCharacterDetail() }
+        }
 }

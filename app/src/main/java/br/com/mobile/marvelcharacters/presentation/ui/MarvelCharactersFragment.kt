@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.mobile.marvelcharacters.R
-import br.com.mobile.marvelcharacters.data.utils.Logger
 import br.com.mobile.marvelcharacters.databinding.FragmentMarvelCharactersBinding
 import br.com.mobile.marvelcharacters.domain.model.CharacterResult
 import br.com.mobile.marvelcharacters.presentation.adapter.MarvelCharactersAdapter
@@ -21,22 +19,24 @@ import br.com.mobile.marvelcharacters.presentation.viewmodel.MarvelCharactersVie
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MarvelCharactersFragment : Fragment() {
-
     private var _binding: FragmentMarvelCharactersBinding? = null
     private val viewModel: MarvelCharactersViewModel by viewModel()
 
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMarvelCharactersBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         setupButtons()
         setupListeners()
@@ -74,13 +74,14 @@ class MarvelCharactersFragment : Fragment() {
     private fun setupRecyclerView(characters: List<CharacterResult>?) {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this.context)
-            adapter = MarvelCharactersAdapter(characters) {
-                val action =
-                    MarvelCharactersFragmentDirections.actionMarvelCharactersFragmentToMarvelCharacterDetailFragment(
-                        it
-                    )
-                findNavController().navigate(action)
-            }
+            adapter =
+                MarvelCharactersAdapter(characters) {
+                    val action =
+                        MarvelCharactersFragmentDirections.actionMarvelCharactersFragmentToMarvelCharacterDetailFragment(
+                            it,
+                        )
+                    findNavController().navigate(action)
+                }
         }
     }
 

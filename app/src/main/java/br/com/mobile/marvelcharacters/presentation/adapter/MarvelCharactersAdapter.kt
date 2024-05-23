@@ -12,17 +12,22 @@ import com.squareup.picasso.Picasso
 
 class MarvelCharactersAdapter(
     private var characters: List<CharacterResult>?,
-    private val onItemClick: (CharacterResult?) -> Unit
+    private val onItemClick: (CharacterResult?) -> Unit,
 ) :
     RecyclerView.Adapter<MarvelCharactersAdapter.ViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): ViewHolder {
         val binding =
             ItemMarvelCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: ViewHolder,
+        position: Int,
+    ) {
         val character = characters?.get(position)
         holder.bind(character)
     }
@@ -33,7 +38,6 @@ class MarvelCharactersAdapter(
 
     inner class ViewHolder(private val binding: ItemMarvelCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(characterDetail: CharacterResult?) {
             with(binding) {
                 Picasso.get()

@@ -8,9 +8,8 @@ import kotlinx.coroutines.withContext
 
 class GetMarvelCharacterUseCase(
     private val repository: MarvelCharacterRepository,
-    private val ioDispatcher: CoroutineDispatcher
+    private val ioDispatcher: CoroutineDispatcher,
 ) {
-
     suspend operator fun invoke(): Result<List<CharacterResult>?> {
         return withContext(ioDispatcher) {
             repository.getMarvelCharactersDetail()

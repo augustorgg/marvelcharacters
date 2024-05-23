@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.domain.model.onGenericError
 import br.com.mobile.marvelcharacters.domain.model.onNetworkError
 import br.com.mobile.marvelcharacters.domain.model.onSuccess
@@ -13,9 +12,8 @@ import br.com.mobile.marvelcharacters.presentation.ui.state.MarvelCharactersView
 import kotlinx.coroutines.launch
 
 class MarvelCharactersViewModel(
-    private val getMarvelCharacterUseCase: GetMarvelCharacterUseCase
+    private val getMarvelCharacterUseCase: GetMarvelCharacterUseCase,
 ) : ViewModel() {
-
     private val _viewState = MutableLiveData<MarvelCharactersViewState>()
     val viewState: LiveData<MarvelCharactersViewState> = _viewState
 

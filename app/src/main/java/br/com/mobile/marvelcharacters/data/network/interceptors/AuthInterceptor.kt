@@ -2,13 +2,12 @@ package br.com.mobile.marvelcharacters.data.network.interceptors
 
 import br.com.mobile.marvelcharacters.BuildConfig.API_PRIVATE_KEY
 import br.com.mobile.marvelcharacters.BuildConfig.API_PUBLIC_KEY
-import java.security.MessageDigest
-import java.util.Date
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.security.MessageDigest
+import java.util.Date
 
 class AuthInterceptor : Interceptor {
-
     private val publicKey: String = API_PUBLIC_KEY
     private val privateKey: String = API_PRIVATE_KEY
 
@@ -19,11 +18,12 @@ class AuthInterceptor : Interceptor {
         val ts = Date().time.toString()
         val hash = md5("$ts$privateKey$publicKey")
 
-        val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("apikey", publicKey)
-            .addQueryParameter("ts", ts)
-            .addQueryParameter("hash", hash)
-            .build()
+        val url =
+            originalHttpUrl.newBuilder()
+                .addQueryParameter("apikey", publicKey)
+                .addQueryParameter("ts", ts)
+                .addQueryParameter("hash", hash)
+                .build()
 
         val requestBuilder = original.newBuilder().url(url)
         val request = requestBuilder.build()

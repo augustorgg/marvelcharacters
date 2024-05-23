@@ -8,7 +8,6 @@ import br.com.mobile.marvelcharacters.R
 import br.com.mobile.marvelcharacters.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
@@ -20,7 +19,5 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
-
     }
-
 }
