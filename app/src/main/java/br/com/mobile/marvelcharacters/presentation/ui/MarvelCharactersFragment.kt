@@ -85,11 +85,6 @@ class MarvelCharactersFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     private fun setupButtons() {
         binding.apply {
             btnWhatsapp.setOnClickListener {
@@ -100,5 +95,10 @@ class MarvelCharactersFragment : Fragment() {
                 viewModel.getMarvelCharactersDetails()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
