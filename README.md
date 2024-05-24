@@ -9,7 +9,10 @@ O Marvel Characters App é um aplicativo desenvolvido para fornecer aos usuário
 - Apresenta uma experiência visual agradável com o uso do framework de design Material Components.
 - Trata erros de conexão e exibe mensagens informativas ao usuário em caso de falhas.
 - Inclui um botão de WhatsApp para comunicação direta com o desenvolvedor, oferecendo suporte e feedback rápido.
+- Adiciona um botão de voltar que retorna à tela dos personagens, permitindo fácil navegação para os usuários.
 
+## Design no Figma
+O design da aplicação foi elaborado no Figma, garantindo uma interface intuitiva. Cada componente foi desenhado para proporcionar a melhor experiência visual e funcional possível. Para mais detalhes sobre o design, consulte o projeto no Figma através deste [link](https://www.figma.com/design/6sEYeXwVxQJUQGVqrXQt73/Marvel-Characters?node-id=0-1&t=pjvxZekxVRbvPStW-0).
 
 ## Capturas de Tela
 <div style="display: flex;">
